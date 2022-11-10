@@ -1,0 +1,30 @@
+<div class="mb-3 d-flex justify-content-center"  style="margin-top: 70px;">
+    <h2>List of your reservations</h2>
+</div>
+<div class="cont" style="margin-top: 30px;">
+    <div>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Business Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="bookings !== null">
+                <td>1</td>
+                <td>{{ bookings?.name }}</td>
+                <td>{{bookings?.date}}</td>
+                <td>{{bookings?.time}}</td>
+                <td>{{bookings?.email}}</td>
+                <td>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete_outline" (click)="delBooking()"></mat-icon>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

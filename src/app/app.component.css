@@ -1,0 +1,9 @@
+.active {
+    color: #3578e5;
+    border: 0px solid;
+    border-color: #ddd;
+  }
+
+.lnk:hover {
+    cursor: pointer;
+}

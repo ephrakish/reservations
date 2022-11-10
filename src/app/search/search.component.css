@@ -1,0 +1,73 @@
+@media all and (min-width: 620px) {
+    .cont, .cont2, .cont3, .cont-search {
+      width: 50%;
+      margin-left: auto; 
+      margin-right: auto;
+    }
+  }
+
+@media all and (max-width: 768px) {
+    .cont, .cont2, .cont3, .cont-search {
+      width: 95%;
+      margin-left: auto; 
+      margin-right: auto;
+    }
+  }
+
+  .cont{
+    background-color: white;
+    border-radius: 7px;
+    padding: 30px;
+  }
+
+  .cont2{
+    background-color: white;
+    border-radius: 7px;
+    padding: 2px;
+  }
+  .cont3{
+    background-color: white;
+    border-radius: 7px;
+    padding: 5px;
+  }
+  .cont-search{
+    background-color: white;
+    border-radius: 7px;
+    padding: 5px;
+  }
+
+.sub-head {
+    font-weight: 600;
+}
+
+.red {
+    color: red;
+}
+
+.twitter {
+    color: #1DA1F2;
+}
+
+.fb {
+    color: #4267B2;
+    margin-left: 6px;
+}
+
+agm-map {
+    height: 300px;
+  }
+
+.back {
+    padding: 5px;
+    align-items: center;
+    align-content: center;
+    background-color: rgb(235, 235, 235);
+    border-radius: 50%;
+}
+
+.review-itm { 
+    background: rgb(255, 255, 255);
+ }
+.review-itm:nth-child(odd) { 
+    background: rgb(235, 235, 235);
+ }

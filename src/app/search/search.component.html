@@ -1,0 +1,228 @@
+<div class="cont" style="margin-top: 70px;">
+    <div>
+        <div class="mb-3 d-flex justify-content-center">
+            <h2>Business search</h2>
+        </div>
+        <div>
+            <div class="mb-3">
+              <label for="" class="form-label">Keyword</label>
+              <input type="text" class="form-control" id="" [(ngModel)]="term" (ngModelChange)="changeFn($event)" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" >
+                <mat-option *ngFor="let term of terms " [value]="term.text">
+                  {{term.text}}
+                </mat-option>
+              </mat-autocomplete>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col">
+                        <label for="" class="form-label">Distance</label>
+                        <input type="number" class="form-control" id="" [(ngModel)]="distance">
+                    </div>
+                    <div class="col">
+                        <label for="" class="form-label">Category</label>
+                        <select class="form-select steps-content inputs" (click)="updateCat($event)">
+                            <option *ngFor='let category of categories; let i = index' value={{category}}>{{category}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Location</label>
+              <input type="text" class="form-control"  [(ngModel)]="location">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input"  (change)="autoDetect()">
+              <label class="form-check-label" for="exampleCheck1">Auto-detect my location</label>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="mr-2" style="margin-right: 5px;">
+                    <button type="submit" class="btn btn-danger" (click)="completePost()">Submit</button>
+                </div>
+                <div class="ml-2" style="margin-left: 5px;">
+                    <button type="submit" class="btn btn-primary" (click)="clearForm()">Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cont2 mt-3"  *ngIf="businesses.length === 0">
+    <div class="d-inline-flex">
+        <p class="red p-3">No results available</p>
+    </div>
+</div>
+<div class="cont3 mt-3" *ngIf="businesses.length !== 0">
+    <div>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                  <th class="">#</th>
+                  <th class="">Image</th>
+                  <th class="">Business name</th>
+                  <th class="">Rating</th>
+                  <th class="">Distance (miles)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class=""  *ngFor='let business of businesses; let i = index'>
+                  <td class=""  (click)="handleFetchBusiness(business.name, business)">{{business.id}}</td>
+                  <td  (click)="handleFetchBusiness(business.name, business)"><img style="width:100%;" class="img-responsive" src={{business.image_url}}/></td>
+                  <td class=""  (click)="handleFetchBusiness(business.name, business)">{{business.name}}</td>
+                  <td class=""  (click)="handleFetchBusiness(business.name, business)">{{business.rating}}</td>
+                  <td class=""  (click)="handleFetchBusiness(business.name, business)">{{business.distance}}</td>
+                </tr>
+              </tbody>
+        </table>
+    </div>
+</div>
+<div class="cont-search" style="margin-top: 70px;"  *ngIf="business.length !== 0">
+    <div>
+        <div class="mb-3 d-flex justify-content-start">
+            <div class="back" (click)="backFetchBusinesses()">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon>
+            </div>
+        </div>
+        <div class="mb-3 d-flex justify-content-center">
+            <h2>{{business.name}}</h2>
+        </div>
+        <div class="mb-3">
+            <mat-tab-group>
+                <mat-tab label="Business details">
+                    <div class="row">
+                        <div class="col-6 col-sm-12">
+                            <div class="text-center">
+                                <h3 class="sub-head">Address</h3>
+                                <p>{{business.location.address1}}</p>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="sub-head">Phone</h3>
+                                <p>{{business.phone}}</p>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="sub-head">Status</h3>
+                                <p class="red">{{business.is_closed}}</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-12">
+                            <div class="text-center">
+                                <h3 class="sub-head">Category</h3>
+                                <p>{{business.categories[0]}}</p>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="sub-head">Price Range</h3>
+                                <p>{{business.price}}</p>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="sub-head">Visit Yelp for more</h3>
+                                <a href="#">{{business.url}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Reserve Now</button>
+                    </div>
+                    <div class="text-center mb-3">
+                        <span>Share on:</span>
+                        <span><img class="twitter"
+                            src="../../assets/icons8-twitter.svg" width="20px" height="20px"
+                            alt="twitter"></span>
+                        <span><img class="fb"
+                            src="../../assets/icons8-facebook.svg" width="20px" height="20px"
+                            alt="twitter"></span>
+                    </div>
+                    <div class="text-center mb-3">
+                        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img src={{business.image_url}} class="d-block w-100" alt="...">
+                              </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Map Location">
+                    <google-map height="400px"
+                                width="750px"
+                                [center]="center"
+                                [zoom]="zoom"
+                                (mapClick)="moveMap($event)"
+                                (mapMousemove)="move($event)">
+                    </google-map>
+
+                    <div>Latitude: {{display?.lat}}</div>
+                    <div>Longitude: {{display?.lng}}</div>
+                </mat-tab>
+                <mat-tab label="Reviews">
+                    <div class="review-itm">
+                        <p>Susan T</p>
+                        <p>Rating: 5/5</p>
+                        <p>Great Sushi place</p>
+                        <p>2022-09-25</p>
+                        <hr style="margin: 5px 0px;width: 100%;">
+                    </div>
+                    <div class="review-itm">
+                        <p>Susan T</p>
+                        <p>Rating: 5/5</p>
+                        <p>Great Sushi place</p>
+                        <p>2022-09-25</p>
+                        <hr style="margin: 5px 0px;width: 100%;">
+                    </div>
+                    <div class="review-itm">
+                        <p>Susan T</p>
+                        <p>Rating: 5/5</p>
+                        <p>Great Sushi place</p>
+                        <p>2022-09-25</p>
+                        <hr style="margin: 5px 0px;width: 100%;">
+                    </div>
+                </mat-tab>
+            </mat-tab-group>  
+        </div>
+    </div>
+</div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Reservation form</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class=" d-flex justify-content-center">
+                <h3 class="sub-head">{{business.name}}</h3>
+            </div>
+            <div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="email">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Date</label>
+                    <input type="date" placeholder="yyyy-mm-dd" class="form-control" ngbDatepicker [(ngModel)]="date">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Time</label>
+                  <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="mr-2">
+                        <button type="submit" class="btn btn-danger" (click)="submitBooking()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,17 @@
+<nav class="navbar fixed-top bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand">Navbar</a>
+    <div class="d-flex">
+      <span routerLinkActive="active" class="lnk" [routerLink]="['/search']" style="margin-right: 5px;">Search</span>
+      <span routerLinkActive="active" [routerLink]="['/bookings']" >My Bookings</span>
+    </div>
+    <!-- <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form> -->
+  </div>
+</nav>
+<div>
+  <router-outlet>
+  </router-outlet>
+</div>

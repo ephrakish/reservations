@@ -1,0 +1,21 @@
+@media all and (min-width: 620px) {
+    .cont, .cont2, .cont3 {
+      width: 50%;
+      margin-left: auto; 
+      margin-right: auto;
+    }
+  }
+
+@media all and (max-width: 768px) {
+    .cont, .cont2, .cont3 {
+      width: 95%;
+      margin-left: auto; 
+      margin-right: auto;
+    }
+  }
+
+  .cont{
+    background-color: white;
+    border-radius: 7px;
+    padding: 5px;
+  }
